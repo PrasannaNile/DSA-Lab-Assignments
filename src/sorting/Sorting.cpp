@@ -1,14 +1,15 @@
 #include "sorting/Sorting.hpp"
 
 
-void BubbleSort::sort(std::vector<int>& data) {
+int BubbleSort::sort(std::vector<int>& data) {
     size_t n = data.size();
-
+    int comparison = 0;
     for(int i = 1; i < n; i++) {
 
         bool swapped = false;
 
         for(int j = 1; j <= n-i; j++) {
+            comparison ++;
             if(data[j] < data[j-1]) {
                 swapped = true;
                 std::swap(data[j], data[j-1]);
@@ -19,6 +20,8 @@ void BubbleSort::sort(std::vector<int>& data) {
             break;
         }
     }
+
+    return comparison;
 }
 
 
