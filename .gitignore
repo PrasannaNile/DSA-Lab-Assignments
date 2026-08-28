@@ -1,0 +1,99 @@
+# -------------------------------------------------------------
+# Build Outputs & CMake Artifacts
+# -------------------------------------------------------------
+build/
+bin/
+out/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.ninja
+.ninja_*
+
+# -------------------------------------------------------------
+# Compiled Binaries & Libraries
+# -------------------------------------------------------------
+*.exe
+*.out
+*.app
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+
+# Specific test runner binary if compiled inside tests/
+tests/test_runner
+tests/test_runner.exe
+
+# -------------------------------------------------------------
+# Generated Simulation Data & Plots (Optional / Temporary)
+# -------------------------------------------------------------
+# Keep track of source .m and .cpp files, but ignore generated CSV outputs
+*.csv
+*.log
+
+# -------------------------------------------------------------
+# IDE & System Files
+# -------------------------------------------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# -------------------------------------------------------------
+# Python Bytecode & Cache
+# -------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# -------------------------------------------------------------
+# Virtual Environments
+# -------------------------------------------------------------
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# -------------------------------------------------------------
+# Jupyter Notebook Checkpoints & Data Visualizations
+# -------------------------------------------------------------
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# -------------------------------------------------------------
+# Distribution / Packaging / Testing
+# -------------------------------------------------------------
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
