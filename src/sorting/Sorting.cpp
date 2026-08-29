@@ -25,20 +25,46 @@ int BubbleSort::sort(std::vector<int>& data) {
 }
 
 
-void InsertionSort::sort(std::vector<int>& data) {
+int InsertionSort::sort(std::vector<int>& data) {
     size_t n = data.size();
-
+    int comparison = 0;
     for(int i = 1; i < n; i++) {
         int key = data[i];
         int j = i - 1;
 
         while(j >= 0 && data[j] > key) {
+            comparison++;
             data[j + 1] = data[j];
             j--;
         }
+        comparison++;
         data[j + 1] = key;
     }
+
+    return comparison;
 }
+
+int InsertionSort::sort(std::vector<int>& data, int start, int end) {
+    int comparison = 0;
+
+    for(int i = start+1; i <= end; i++) {
+        int val = data[i];
+        int j = i-1;
+
+        while(j >= start && data[j] > val) {
+            data[j+1] = data[j];
+            j--;
+            comparison++;
+        }
+
+        data[j+1] = val;
+    }
+
+    return comparison;
+}
+
+
+int QuickSort::comparison = 0;
 
 int QuickSort::lomutoPartition(std::vector<int>& data, int start, int end) {
     int pivot = data[end];
@@ -46,6 +72,7 @@ int QuickSort::lomutoPartition(std::vector<int>& data, int start, int end) {
     int left = start-1;
     
     for(int right = start; right < end; right++) {
+        comparison++;
         if(data[right] < pivot) {
             left++;
             std::swap(data[left], data[right]);
@@ -65,10 +92,12 @@ int QuickSort::hoarePartition(std::vector<int>& data, int start, int end) {
 
     while(true) {
         do {
+            comparison++;
             left++;
         } while(data[left] < pivot);
 
         do {
+            comparison++;
             right--;
         } while(data[right] > pivot);
 
@@ -95,10 +124,12 @@ int QuickSort::median_of_three(std::vector<int>& data, int start, int end) {
 
     while(true) {
         do {
+            comparison++;
             left++;
         } while(data[left] < pivot);
 
         do {
+            comparison++;
             right--;
         } while(data[right] > pivot);
 
@@ -111,7 +142,7 @@ int QuickSort::median_of_three(std::vector<int>& data, int start, int end) {
 }
 
 
-void QuickSort::sort(std::vector<int>& data, int start, int end, PartitionScheme scheme) {
+void QuickSort::sorting(std::vector<int>& data, int start, int end, PartitionScheme scheme) {
     if(start >= end) return;
 
     int p = 0;
@@ -119,13 +150,23 @@ void QuickSort::sort(std::vector<int>& data, int start, int end, PartitionScheme
     switch(scheme) {
         case PartitionScheme::LOMUTO:
             p = lomutoPartition(data, start, end);
+            sorting(data, start, p-1, scheme);
+            sorting(data, p+1, end, scheme);
             break;
 
         case PartitionScheme::HOARE:
             p = hoarePartition(data, start, end);
+            sorting(data, start, p, scheme);
+            sorting(data, p+1, end, scheme);
             break;
 
     }
 
-    sort(data, start, p-1, scheme);
+}
+
+
+int QuickSort::sort(std::vector<int>& data, PartitionScheme scheme) {
+    reset_comparison();
+    sorting(data, 0, data.size()-1, scheme);
+    return comparison;
 }
