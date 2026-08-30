@@ -14,7 +14,7 @@ void two_coin_exp(int total_tosses) {
 
     if(!file.is_open()) throw std::runtime_error("Failed to open file for writing.");
 
-    file << "TossCount,HH,P(HH),HT,P(HT),TH,P(TH),TT,P(TT)" << "\n";
+    file << "TossCount,HH,ProbHH,HT,ProbHT,TH,ProbTH,TT,ProbTT" << "\n";
 
     int hh = 0;
     int ht = 0;
@@ -61,7 +61,7 @@ void one_coin_exp(int total_tosses) {
 
     if(!file.is_open()) throw std::runtime_error("Failed to open file for writing.");
 
-    file << "TossCount,HeadCount,P(Head),TailCount,P(Tail)" << "\n";
+    file << "TossCount,HeadCount,ProbHead,TailCount,ProbTail" << "\n";
 
     int heads = 0;
     int tails = 0;
@@ -88,7 +88,7 @@ void one_coin_exp(int total_tosses) {
 
 
 int main() {
-    int total_tosses = 1e5;
+    int total_tosses = 1e4;
 
     // One coin experiment
     one_coin_exp(total_tosses);

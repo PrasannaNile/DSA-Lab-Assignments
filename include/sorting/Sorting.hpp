@@ -13,7 +13,8 @@ public:
 class InsertionSort {
 private:
 public:
-    static void sort(std::vector<int>& data);
+    static int sort(std::vector<int>& data);
+    static int sort(std::vector<int>& data, int start, int end);
 };
 
 
@@ -27,6 +28,9 @@ enum class PartitionScheme {
 
 class QuickSort {
 private:
+    static int comparison;
+    static void sorting(std::vector<int>& data, int start, int end, PartitionScheme scheme);
+
 public:
     static int lomutoPartition(std::vector<int>& data, int start, int end);
 
@@ -34,5 +38,15 @@ public:
 
     static int median_of_three(std::vector<int>& data, int start, int end);
 
-    static void sort(std::vector<int>& data, int start, int end, PartitionScheme scheme);
+    static int sort(std::vector<int>& data, PartitionScheme scheme);
+
+
+    static void reset_comparison() {
+        comparison = 0;
+    }
+
+    static int get_comparison() {
+        return comparison;
+    }
+
 };
