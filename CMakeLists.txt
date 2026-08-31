@@ -39,6 +39,12 @@ add_executable(assign1_q3
 # ==========================================
 
 # Question 8: Randomised quick vs Standard Quick Sort
+add_executable(assign2_q7
+    Assignment2/cpp/q7_majorityElement/main.cpp
+    ${SHARED_SOURCES}
+)
+
+# Question 8: Randomised quick vs Standard Quick Sort
 add_executable(assign2_q8
     Assignment2/cpp/q8_randomizedQuickSort/main.cpp
     ${SHARED_SOURCES}
