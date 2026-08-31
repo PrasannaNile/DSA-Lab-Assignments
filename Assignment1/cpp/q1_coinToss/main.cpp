@@ -10,7 +10,7 @@ void two_coin_exp(int total_tosses) {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> distrib(0, 1);
 
-    std::fstream file("two_coin_toss.csv", std::ios::out | std::ios::in | std::ios::trunc);
+    std::fstream file("Assignment1/cpp/q1_coinToss/q1_two_coin_toss.csv", std::ios::out | std::ios::in | std::ios::trunc);
 
     if(!file.is_open()) throw std::runtime_error("Failed to open file for writing.");
 
@@ -57,7 +57,7 @@ void one_coin_exp(int total_tosses) {
     std::uniform_int_distribution<int> distrib(0, 1);
 
 
-    std::fstream file("one_coin_toss.csv", std::ios::out | std::ios::in | std::ios::trunc);
+    std::fstream file("Assignment1/cpp/q1_coinToss/q1_one_coin_toss.csv", std::ios::out | std::ios::in | std::ios::trunc);
 
     if(!file.is_open()) throw std::runtime_error("Failed to open file for writing.");
 

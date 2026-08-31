@@ -31,7 +31,7 @@ int main() {
 
 
     // data is really distored from its original place (0.8)
-    std::fstream file("comparisonHighlyRandom.csv", std::ios::out | std::ios::in | std::ios::trunc);
+    std::fstream file("Assignment1/cpp/q2_bubbleSort/q2_comparisonHighlyRandom.csv", std::ios::out | std::ios::in | std::ios::trunc);
     if(!file.is_open()) throw std::runtime_error("File cannot be opened");
 
     file << "InputSize,Comp(optimised),Comp(non optimised)\n";
@@ -52,7 +52,7 @@ int main() {
     file.close();
 
     // data is sorted 
-    file.open("comparisonAlreadySorted.csv", std::ios::out | std::ios::in | std::ios::trunc);
+    file.open("Assignment1/cpp/q2_bubbleSort/q2_comparisonAlreadySorted.csv", std::ios::out | std::ios::in | std::ios::trunc);
     if(!file.is_open()) throw std::runtime_error("File cannot be open or recreate");
 
     file << "InputSize,Comp(optimised),Comp(non optimised)\n";
@@ -72,7 +72,7 @@ int main() {
     file.close();
 
     // data is nearly sorted 
-    file.open("comparisonNearlySorted.csv", std::ios::out | std::ios::in | std::ios::trunc);
+    file.open("Assignment1/cpp/q2_bubbleSort/q2_comparisonNearlySorted.csv", std::ios::out | std::ios::in | std::ios::trunc);
     if(!file.is_open()) throw std::runtime_error("File cannot be open or recreate");
 
     file << "InputSize,Comp(optimised),Comp(non optimised)\n";

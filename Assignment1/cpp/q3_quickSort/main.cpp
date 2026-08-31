@@ -96,7 +96,7 @@ int main() {
     InsertionSort isort;
     QuickSort qsort;
 
-    std::fstream file("InsertQuickUnsortedComparison.csv", std::ios::in | std::ios::out | std::ios::trunc);
+    std::fstream file("Assignment1/cpp/q3_quickSort/q3_InsertQuickUnsortedComparison.csv", std::ios::in | std::ios::out | std::ios::trunc);
     if(!file.is_open()) throw std::runtime_error("File cannot be open or cannot be recreate");
 
     file << "Datasize,InsertionComparison,QuickComparison\n";
@@ -113,7 +113,7 @@ int main() {
 
     file.close();
 
-    std::fstream file2("InsertHybridQuickComparison.csv", std::ios::in | std::ios::out | std::ios::trunc);
+    std::fstream file2("Assignment1/cpp/q3_quickSort/q3_InsertHybridQuickComparison.csv", std::ios::in | std::ios::out | std::ios::trunc);
     if(!file2.is_open()) throw std::runtime_error("File not opened!!");
 
     file2<< "InputSize, Comp(QSort), Comp(HQSort)" << "\n";
