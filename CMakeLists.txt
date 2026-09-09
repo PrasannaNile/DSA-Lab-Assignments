@@ -15,7 +15,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 # ==========================================
 
 # Question 1: Coin Toss
-add_executable(assign1_q1 
+add_executable(assign1_q1
     Assignment1/cpp/q1_coinToss/main.cpp 
     ${SHARED_SOURCES}
 )
@@ -32,7 +32,38 @@ add_executable(assign1_q3
     ${SHARED_SOURCES}
 )
 
+
+
 # ==========================================
-# (Optional) Future Assignments can go here:
+# ASSIGNMENT 2 TARGETS
 # ==========================================
-# add_executable(assign2_q1 Assignment2/cpp/q1_someProblem/main.cpp ${SHARED_SOURCES})
+
+# Question 4: Compute PI
+add_executable(assign2_q4
+    Assignment2/cpp/q4_computePI/main.cpp
+    ${SHARED_SOURCES}
+)
+
+# Question 5: Numerical Integration
+add_executable(assign2_q5
+    Assignment2/cpp/q5_numericalIntegration/main.cpp
+    ${SHARED_SOURCES}
+)
+
+# Question 4: Compute PI
+add_executable(assign2_q6
+    Assignment2/cpp/q6_primalityTesting/main.cpp
+    ${SHARED_SOURCES}
+)
+
+# Question 8: Randomised quick vs Standard Quick Sort
+add_executable(assign2_q7
+    Assignment2/cpp/q7_majorityElement/main.cpp
+    ${SHARED_SOURCES}
+)
+
+# Question 8: Randomised quick vs Standard Quick Sort
+add_executable(assign2_q8
+    Assignment2/cpp/q8_randomizedQuickSort/main.cpp
+    ${SHARED_SOURCES}
+)

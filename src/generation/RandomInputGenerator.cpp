@@ -88,6 +88,8 @@ std::vector<int> RandomInputGenerator::generateInput(
         case InputType::HIGHLY_INVERSIONAL:
             changeOrdering(data, 0.8, order == SortOrder::ASCENDING ? SortOrder::DESCENDING : SortOrder::ASCENDING);
             break;
+        case InputType::RANDOM:
+            break;
         default:
             throw std::invalid_argument("Invalid input type.");
     }

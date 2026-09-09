@@ -7,7 +7,7 @@ close all;
 %  HIGHLY INVERSIONAL DATA
 % =============================================================
 
-data = readtable('comparisonHighlyRandom.csv');
+data = readtable('q2_comparisonHighlyRandom.csv');
 
 inputSize = data{:, 1};
 compNES   = data{:, 2};
@@ -34,7 +34,7 @@ grid on;
 %  NEARLY SORTED DATA
 % =============================================================
 
-data = readtable('comparisonNearlySorted.csv');
+data = readtable('q2_comparisonNearlySorted.csv');
 
 inputSize = data{:, 1};
 compNES   = data{:, 2};
@@ -61,7 +61,7 @@ grid on;
 %  SORTED DATA
 % =============================================================
 
-data = readtable('comparisonAlreadySorted.csv');
+data = readtable('q2_comparisonAlreadySorted.csv');
 
 inputSize = data{:, 1};
 compNES   = data{:, 2};

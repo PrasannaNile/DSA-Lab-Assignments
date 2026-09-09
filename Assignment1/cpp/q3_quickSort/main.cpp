@@ -96,37 +96,51 @@ int main() {
     InsertionSort isort;
     QuickSort qsort;
 
-    std::fstream file("InsertQuickUnsortedComparison.csv", std::ios::in | std::ios::out | std::ios::trunc);
+    std::fstream file("Assignment1/cpp/q3_quickSort/q3_InsertQuickUnsortedComparison.csv", std::ios::in | std::ios::out | std::ios::trunc);
     if(!file.is_open()) throw std::runtime_error("File cannot be open or cannot be recreate");
 
     file << "Datasize,InsertionComparison,QuickComparison\n";
 
+    int TRAILS = 30;
+
     for(int datasize = 10; datasize <= 1000; datasize++) {
-        std::vector<int> data1 = generator.generateInput(datasize, 1, 10000, InputType::HIGHLY_INVERSIONAL);
-        std::vector<int> data2 = data1;
-        int insertionComparison = isort.sort(data1);
 
-        int quickComparison = qsort.sort(data2, PartitionScheme::HOARE);
+        int total_comp_insertion = 0;
+        int total_comp_quick = 0;
 
-        file << datasize << "," << insertionComparison << "," << quickComparison << "\n";
+        for(int t = 1; t <= TRAILS; t++) {
+            std::vector<int> data1 = generator.generateInput(datasize, 1, 10000, InputType::HIGHLY_INVERSIONAL);
+            std::vector<int> data2 = data1;
+            total_comp_insertion += isort.sort(data1);
+    
+            total_comp_quick += qsort.sort(data2, PartitionScheme::HOARE);
+        }
+
+        file << datasize << "," << total_comp_insertion * 1.0 / TRAILS << "," << total_comp_quick * 1.0 / TRAILS << "\n";
     }
 
     file.close();
 
-    std::fstream file2("InsertHybridQuickComparison.csv", std::ios::in | std::ios::out | std::ios::trunc);
+    std::fstream file2("Assignment1/cpp/q3_quickSort/q3_InsertHybridQuickComparison.csv", std::ios::in | std::ios::out | std::ios::trunc);
     if(!file2.is_open()) throw std::runtime_error("File not opened!!");
 
     file2<< "InputSize, Comp(QSort), Comp(HQSort)" << "\n";
     for(int datasize = 100; datasize <= 400; datasize++){
-        std::vector<int> qSortData = generator.generateInput(datasize, 1, 9999,InputType::HIGHLY_INVERSIONAL,SortOrder::ASCENDING, 0.75);
-        std::vector<int> hybridData = qSortData;
 
-        int qSortComparison = QuickSort::sort(qSortData, PartitionScheme::LOMUTO);
+        int total_comp_quick = 0;
+        int total_comp_hybid = 0;
 
-        HybridSort::sort(hybridData);
-        int hSortComparison = HybridSort::getComparisons();
-        HybridSort::resetComparisons();
-        file2<< datasize << ", " << qSortComparison << ", " << hSortComparison << "\n";
+        for(int t = 1; t <= TRAILS; t++) {
+            std::vector<int> qSortData = generator.generateInput(datasize, 1, 9999,InputType::HIGHLY_INVERSIONAL,SortOrder::ASCENDING, 0.75);
+            std::vector<int> hybridData = qSortData;
+    
+            total_comp_quick += QuickSort::sort(qSortData, PartitionScheme::LOMUTO);
+    
+            HybridSort::sort(hybridData);
+            total_comp_hybid += HybridSort::getComparisons();
+            HybridSort::resetComparisons();
+        }
+        file2<< datasize << ", " << total_comp_quick * 1.0 / TRAILS << ", " << total_comp_hybid * 1.0 / TRAILS << "\n";
     }
 
     file2.close();
