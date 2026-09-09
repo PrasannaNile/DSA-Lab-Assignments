@@ -8,7 +8,8 @@ enum class InputType {
     SORTED,
     REVERSE_SORTED,
     NEARLY_SORTED,
-    HIGHLY_INVERSIONAL
+    HIGHLY_INVERSIONAL,
+    RANDOM
 };
 
 enum class SortOrder{

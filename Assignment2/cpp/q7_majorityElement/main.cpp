@@ -1,26 +1,13 @@
 #include "generation/RandomInputGenerator.hpp"
+
+
 #include <iostream>
 #include <vector>
 #include <random>
 #include <fstream>
 #include <algorithm>
+#include <unordered_map>
 
-class MajorityElement {
-private:
-    static int freq_of_number(const std::vector<int>& data, int target) {
-        int freq = 0;
-        for (int ele : data) {
-            if (ele == target) freq++;
-        }
-        return freq;
-    }
-
-public:
-    static bool is_majority(const std::vector<int>& data, int idx) {
-        // Strict majority definition: strictly greater than n/2
-        return freq_of_number(data, data[idx]) > static_cast<int>(data.size() / 2);
-    }
-};
 
 int main() {
     RandomInputGenerator generator{};
@@ -59,6 +46,10 @@ int main() {
             for (int i = 0; i < majority_count; i++) {
                 data[i] = targetEle;
             }
+
+            std::unordered_map<int, int> hash {};
+            for(int x: data) hash[x] ++;
+
             std::shuffle(data.begin(), data.end(), gen);
 
             // 3. Search up to 10 random attempts
@@ -67,7 +58,7 @@ int main() {
 
             for (int k = 1; k <= MAX_ATTEMPTS; k++) {
                 int idx = distrib(gen);
-                if (MajorityElement::is_majority(data, idx)) {
+                if (hash[data[idx]] > datasize/2) {
                     attempts_taken = k;
                     break;
                 }
@@ -99,6 +90,10 @@ int main() {
         for (int i = 0; i < majority_count; i++) {
             data[i] = 1; // Majority element is 1
         }
+
+        std::unordered_map<int, int> hash {};
+        for(int x: data) hash[x] ++;
+
         std::shuffle(data.begin(), data.end(), gen);
 
         std::uniform_int_distribution<int> distrib(0, TEST_SIZE - 1);
@@ -107,7 +102,7 @@ int main() {
         // Perform exactly 10 attempts
         for (int k = 1; k <= MAX_ATTEMPTS; k++) {
             int idx = distrib(gen);
-            if (MajorityElement::is_majority(data, idx)) {
+            if (hash[1] > data.size() / 2) {
                 found = true;
                 break;
             }

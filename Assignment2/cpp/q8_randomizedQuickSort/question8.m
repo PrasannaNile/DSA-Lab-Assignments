@@ -4,8 +4,8 @@ close all;
 %% =========================
 % SORTED DATASET
 % ==========================
-sortedData = readtable("q8_RandQuickVSQuickSorted.csv");
-figure('Name', 'Sorted Dataset', 'NumberTitle', 'off');
+sortedData = readtable("q8_RandQuickVSQuickHoare.csv");
+figure('Name', 'Hoare Partitioning', 'NumberTitle', 'off');
 plot(sortedData.Datasize, sortedData.RandQuickComp, ...
     'LineWidth', 1.5, ...
     'DisplayName', 'RandQuickComp');
@@ -22,8 +22,8 @@ hold off;
 %% =========================
 % UNSORTED DATASET
 % ==========================
-unsortedData = readtable("q8_RandQuickVSQuickUnsorted.csv");
-figure('Name', 'Unsorted Dataset', 'NumberTitle', 'off');
+unsortedData = readtable("q8_RandQuickVSQuickLomuto.csv");
+figure('Name', 'Lomuto Partitioning', 'NumberTitle', 'off');
 plot(unsortedData.Datasize, unsortedData.RandQuickComp, ...
     'LineWidth', 1.5, ...
     'DisplayName', 'RandQuickComp');

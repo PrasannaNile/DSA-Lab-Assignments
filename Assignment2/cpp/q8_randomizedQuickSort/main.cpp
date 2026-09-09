@@ -11,10 +11,11 @@
 class RandomisedQuickSort {
 private:
     static int comparison;
+    static std::random_device rd;
+    static std::mt19937 gen;
 
     static int hoare(std::vector<int>& data, int start, int end) {
-        std::random_device rd {};
-        std::mt19937 gen (rd());
+        
         std::uniform_int_distribution<int> distrib(start, end-1); // to make sure that it is not loop infinitely
 
         int pivot = data[distrib(gen)];
@@ -42,20 +43,53 @@ private:
 
     }
 
+    static int lomuto(std::vector<int>& data, int start, int end) {
+        std::uniform_int_distribution<int> distrib(start, end);
 
-    static void sorting(std::vector<int>& data, int start, int end) {
+        int p = distrib(gen);
+        int pivot = data[p];
+
+        std::swap(data[end], data[p]);
+
+        int left = start-1;
+        for(int right = start; right < end; right++) {
+            comparison++;
+            if(data[right] < pivot) {
+                left++;
+                std::swap(data[left], data[right]);
+            }
+        }
+
+        std::swap(data[left+1], data[end]);
+        return left+1;
+    }
+
+
+    static void sorting(std::vector<int>& data, int start, int end, PartitionScheme scheme) {
         if(start >= end) return;
 
-        int p = hoare(data, start, end);
-        sorting(data, start, p);
-        sorting(data, p+1, end);
+        int p = 0;
+        switch(scheme) {
+            case PartitionScheme::LOMUTO:
+                p = lomuto(data, start, end);
+                sorting(data, start, p-1, scheme);
+                sorting(data, p+1, end, scheme);
+                break;
+
+            case PartitionScheme::HOARE:
+                p = hoare(data, start, end);
+                sorting(data, start, p, scheme);
+                sorting(data, p+1, end, scheme);
+                break;
+        }
+        
     }
 
 public:
 
-    static int sort(std::vector<int>& data) {
+    static int sort(std::vector<int>& data, PartitionScheme scheme) {
         reset_comparison();
-        sorting(data, 0, data.size()-1);
+        sorting(data, 0, data.size()-1, scheme);
         return comparison;
     }
 
@@ -70,13 +104,15 @@ public:
 };
 
 int RandomisedQuickSort::comparison {};
+std::random_device RandomisedQuickSort::rd{};
+std::mt19937 RandomisedQuickSort::gen(rd());
 
 
 int main() {
     RandomInputGenerator generator {};
 
     // highly inversional data set
-    std::fstream file("Assignment2/cpp/q8_randomizedQuickSort/q8_RandQuickVSQuickUnsorted.csv", std::ios::in | std::ios::out | std::ios::trunc);
+    std::fstream file("Assignment2/cpp/q8_randomizedQuickSort/q8_RandQuickVSQuickLomuto.csv", std::ios::in | std::ios::out | std::ios::trunc);
     if(!file.is_open()) throw std::runtime_error("File does not exist or cannot be open");
 
     file << "Datasize,RandQuickComp,QuickComp\n";
@@ -89,10 +125,10 @@ int main() {
         int total_comp_quick = 0;
 
         for(int t = 1; t <= TRAILS; t++) {
-            std::vector<int> data1 = generator.generateInput(datasize, 1, 1e3, InputType::HIGHLY_INVERSIONAL);
+            std::vector<int> data1 = generator.generateInput(datasize, 1, 1e3, InputType::RANDOM);
             std::vector<int> data2 = data1;
 
-            total_comp_randquick += RandomisedQuickSort::sort(data1);
+            total_comp_randquick += RandomisedQuickSort::sort(data1, PartitionScheme::LOMUTO);
             total_comp_quick += QuickSort::sort(data2, PartitionScheme::LOMUTO);
         }
 
@@ -101,7 +137,7 @@ int main() {
 
     // sorted data set
 
-    std::fstream file2("Assignment2/cpp/q8_randomizedQuickSort/q8_RandQuickVSQuickSorted.csv", std::ios::in | std::ios::out | std::ios::trunc);
+    std::fstream file2("Assignment2/cpp/q8_randomizedQuickSort/q8_RandQuickVSQuickHoare.csv", std::ios::in | std::ios::out | std::ios::trunc);
     if(!file2.is_open()) throw std::runtime_error("File does not exist or cannot be open");
 
     file2 << "Datasize,RandQuickComp,QuickComp\n";
@@ -111,11 +147,11 @@ int main() {
         int total_comp_quick = 0;
 
         for(int t = 1; t <= TRAILS; t++) {
-            std::vector<int> data1 = generator.generateInput(datasize, 1, 1e3, InputType::SORTED);
+            std::vector<int> data1 = generator.generateInput(datasize, 1, 1e3, InputType::RANDOM);
             std::vector<int> data2 = data1;
 
-            total_comp_randquick += RandomisedQuickSort::sort(data1);
-            total_comp_quick += QuickSort::sort(data2, PartitionScheme::LOMUTO);
+            total_comp_randquick += RandomisedQuickSort::sort(data1, PartitionScheme::HOARE);
+            total_comp_quick += QuickSort::sort(data2, PartitionScheme::HOARE);
         }
 
         file2 << datasize << "," << total_comp_randquick / TRAILS << "," << total_comp_quick / TRAILS << "\n";

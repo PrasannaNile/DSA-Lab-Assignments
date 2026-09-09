@@ -38,6 +38,24 @@ add_executable(assign1_q3
 # ASSIGNMENT 2 TARGETS
 # ==========================================
 
+# Question 4: Compute PI
+add_executable(assign2_q4
+    Assignment2/cpp/q4_computePI/main.cpp
+    ${SHARED_SOURCES}
+)
+
+# Question 5: Numerical Integration
+add_executable(assign2_q5
+    Assignment2/cpp/q5_numericalIntegration/main.cpp
+    ${SHARED_SOURCES}
+)
+
+# Question 4: Compute PI
+add_executable(assign2_q6
+    Assignment2/cpp/q6_primalityTesting/main.cpp
+    ${SHARED_SOURCES}
+)
+
 # Question 8: Randomised quick vs Standard Quick Sort
 add_executable(assign2_q7
     Assignment2/cpp/q7_majorityElement/main.cpp
