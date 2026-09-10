@@ -125,7 +125,7 @@ int main() {
         int total_comp_quick = 0;
 
         for(int t = 1; t <= TRAILS; t++) {
-            std::vector<int> data1 = generator.generateInput(datasize, 1, 1e3, InputType::RANDOM);
+            std::vector<int> data1 = generator.generateInput(datasize, 1, 1e3, InputType::SORTED);
             std::vector<int> data2 = data1;
 
             total_comp_randquick += RandomisedQuickSort::sort(data1, PartitionScheme::LOMUTO);

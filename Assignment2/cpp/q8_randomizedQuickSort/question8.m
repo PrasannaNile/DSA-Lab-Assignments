@@ -15,7 +15,7 @@ plot(sortedData.Datasize, sortedData.QuickComp, ...
     'DisplayName', 'QuickComp');
 xlabel('Datasize');
 ylabel('Comparisons');
-title('Randomized Quick vs Standard Quick (Sorted)');
+title('Randomized Quick vs Standard Quick (UnSorted Dataset)');
 legend('Location', 'best');
 grid on;
 hold off;
@@ -33,7 +33,7 @@ plot(unsortedData.Datasize, unsortedData.QuickComp, ...
     'DisplayName', 'QuickComp');
 xlabel('Datasize');
 ylabel('Comparisons');
-title('Randomized Quick vs Standard Quick (Unsorted)');
+title('Randomized Quick vs Standard Quick (Sorted Dataset)');
 legend('Location', 'best');
 grid on;
 hold off;
